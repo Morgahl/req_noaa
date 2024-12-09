@@ -1,0 +1,51 @@
+# Example ReqNOAA
+
+```elixir
+Application.put_env(:req_noaa, :name, "Livebook")
+Application.put_env(:req_noaa, :contact, "https://github.com/Morgahl/req_noaa")
+
+Mix.install([
+  {:kino, "~> 0.14.2"},
+  {:kino_maplibre, "~> 0.1.13"},
+  {:req_noaa, github: "Morgahl/req_noaa", branch: "main"}
+])
+
+defmodule StructCleaner do
+  def deep_cleanup(struct) when is_struct(struct) do
+    struct
+    |> Map.from_struct()
+    |> deep_cleanup()
+  end
+
+  def deep_cleanup(map) when is_map(map) do
+    map
+    |> Enum.map(fn {key, value} -> {key, deep_cleanup(value)} end)
+    |> Enum.into(%{})
+  end
+
+  def deep_cleanup(list) when is_list(list) do
+    Enum.map(list, &deep_cleanup/1)
+  end
+
+  def deep_cleanup(value), do: value
+end
+
+```
+
+## Section
+
+```elixir
+alias MapLibre, as: Ml
+with {:ok, zone} <- ReqNOAA.Api.zone_forecast("PZZ350") do
+  Ml.new(center: {-124.5, 43.5}, zoom: 6)
+  |> Ml.add_source(zone.id,
+    type: :geojson,
+    data: StructCleaner.deep_cleanup(zone)
+  )
+  |> Ml.add_layer(id: zone.id,
+    type: :fill,
+    source: zone.id,
+    paint: [fill_color: "#FF0000"]
+  )
+end
+```
