@@ -1,5 +1,7 @@
 defmodule ReqNOAA.Api do
-  @moduledoc false
+  @moduledoc """
+  Module to request data from NOAA API
+  """
 
   alias Req.Response
 

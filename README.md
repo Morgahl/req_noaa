@@ -18,12 +18,21 @@ def deps do
 end
 ```
 
-Due to the fact that the NOAA API makes use of the User-Agent header to identify the client and thus the contact and, you will need to set the following configuration values in your `config.exs` file:
+Due to the fact that the NOAA API makes use of the User-Agent header to identify the client and thus the contact and abuse contacts, you will need to set the following configuration values in your `config.exs` file:
 
 ```elixir
+# config/config.exs
 config :req_noaa,
   name: "MyApp",
   contact: "abuse@myapp.com"
+```
+
+The following configuration values are optional:
+
+```elixir
+# config/runtime.exs
+config :req_noaa,
+  cache_dir: "/path/to/cache/dir" # default: Path.join([System.tmp_dir(), "req_noaa"])
 ```
 
 ## Reporting Issues or Getting in Touch
