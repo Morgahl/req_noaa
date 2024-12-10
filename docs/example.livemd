@@ -7,7 +7,7 @@ Application.put_env(:req_noaa, :contact, "https://github.com/Morgahl/req_noaa")
 Mix.install([
   {:kino, "~> 0.14.2"},
   {:kino_maplibre, "~> 0.1.13"},
-  {:req_noaa, github: "Morgahl/req_noaa", branch: "main"}
+  {:req_noaa, path: Path.join(__DIR__, "..")}
 ])
 
 defmodule StructCleaner do
@@ -35,17 +35,21 @@ end
 ## Section
 
 ```elixir
+  ReqNOAA.API.Alerts.active_area("NM")
+```
+
+```elixir
 alias MapLibre, as: Ml
-with {:ok, zone} <- ReqNOAA.API.Zones.forecast("PZZ350") do
+with {:ok, zone} <- ReqNOAA.API.Zones.forecast("NMZ403") do
   Ml.new(center: {-124.5, 43.5}, zoom: 6)
   |> Ml.add_source(zone.id,
     type: :geojson,
     data: StructCleaner.deep_cleanup(zone)
   )
   |> Ml.add_layer(id: zone.id,
-    type: :fill,
+    type: :line,
     source: zone.id,
-    paint: [fill_color: "#FF0000"]
+    paint: [line_color: "#FF0000"]
   )
 end
 ```
