@@ -15,7 +15,7 @@ defmodule ReqNOAA.API.Aviation do
   - `date` (Date.t): Date (YYYY-MM-DD format)
   - `sequence` (integer()): Sequence number
   """
-  @spec cwa(ReqNOAA.Model.NwsCenterWeatherServiceUnitId.t(), Date.t(), integer()) ::
+  @spec cwa(API.nws_center_weather_service_unit_id(), Date.t(), integer()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.CenterWeatherAdvisoryGeoJson.t()} | {:error, any()}
   def cwa(cwsu_id, date, sequence) do
     API.new()
@@ -40,7 +40,7 @@ defmodule ReqNOAA.API.Aviation do
 
   - `cwsu_id` (NwsCenterWeatherServiceUnitId): NWS CWSU ID
   """
-  @spec cwas(ReqNOAA.Model.NwsCenterWeatherServiceUnitId.t()) ::
+  @spec cwas(API.nws_center_weather_service_unit_id()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.CenterWeatherAdvisoryCollectionGeoJson.t()} | {:error, any()}
   def cwas(cwsu_id) do
     API.new()
@@ -61,7 +61,7 @@ defmodule ReqNOAA.API.Aviation do
 
   - `cwsu_id` (NwsCenterWeatherServiceUnitId): NWS CWSU ID
   """
-  @spec cwsu(ReqNOAA.Model.NwsCenterWeatherServiceUnitId.t()) ::
+  @spec cwsu(API.nws_center_weather_service_unit_id()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.Office.t()} | {:error, any()}
   def cwsu(cwsu_id) do
     API.new()

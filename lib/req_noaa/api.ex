@@ -11,6 +11,12 @@ defmodule ReqNOAA.API do
   @typedoc "Marine region code"
   @type marine_region_code() :: String.t()
 
+  @typedoc "NWS Center Weather Service Unit ID"
+  @type nws_center_weather_service_unit_id() :: String.t()
+
+  @typedoc "NWS office ID"
+  @type nws_office_id() :: String.t()
+
   @vsn Mix.Project.config()[:version]
   @base_url "https://api.weather.gov"
   @app_name Application.compile_env!(:req_noaa, :name)

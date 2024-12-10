@@ -38,13 +38,13 @@ defmodule ReqNOAA.API.Points do
 
   - `point` (String.t): Point (latitude, longitude)
   """
-  @spec point_stations(String.t()) ::
+  @spec stations(String.t()) ::
           {:ok, nil}
           | {:ok, ReqNOAA.Model.PointGeoJson.t()}
           | {:ok, ReqNOAA.Model.PointJsonLd.t()}
           | {:ok, ReqNOAA.Model.ProblemDetail.t()}
           | {:error, any()}
-  def point_stations(point) do
+  def stations(point) do
     API.new()
     |> Req.get(
       url: "/points/:point/stations",

@@ -13,9 +13,9 @@ defmodule ReqNOAA.API.Products do
 
   - `location_id` (String.t): .
   """
-  @spec location_products(String.t()) ::
+  @spec location_types(String.t()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductTypeCollection.t()} | {:error, any()}
-  def location_products(location_id) do
+  def location_types(location_id) do
     API.new()
     |> Req.get(
       url: "/products/locations/:location_id/types",
@@ -51,9 +51,9 @@ defmodule ReqNOAA.API.Products do
   @doc """
   Returns a list of valid text product issuance locations
   """
-  @spec product_locations() ::
+  @spec locations() ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductLocationCollection.t()} | {:error, any()}
-  def product_locations do
+  def locations do
     API.new()
     |> Req.get(url: "/products/locations")
     |> handle_response([
@@ -65,9 +65,9 @@ defmodule ReqNOAA.API.Products do
   @doc """
   Returns a list of valid text product types and codes
   """
-  @spec product_types() ::
+  @spec types() ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductTypeCollection.t()} | {:error, any()}
-  def product_types do
+  def types do
     API.new()
     |> Req.get(url: "/products/types")
     |> handle_response([
@@ -89,9 +89,9 @@ defmodule ReqNOAA.API.Products do
     - `:type` ([String.t]): Product code
     - `:limit` (integer()): Limit
   """
-  @spec products_query(keyword()) ::
+  @spec query(keyword()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductCollection.t()} | {:error, any()}
-  def products_query(opts \\ []) do
+  def query(opts \\ []) do
     API.new()
     |> Req.get(
       url: "/products",
@@ -110,9 +110,9 @@ defmodule ReqNOAA.API.Products do
 
   - `type_id` (String.t): .
   """
-  @spec products_type(String.t()) ::
+  @spec type(String.t()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductCollection.t()} | {:error, any()}
-  def products_type(type_id) do
+  def type(type_id) do
     API.new()
     |> Req.get(
       url: "/products/types/:type_id",
@@ -132,9 +132,9 @@ defmodule ReqNOAA.API.Products do
   - `type_id` (String.t): .
   - `location_id` (String.t): .
   """
-  @spec products_type_location(String.t(), String.t()) ::
+  @spec type_location(String.t(), String.t()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductCollection.t()} | {:error, any()}
-  def products_type_location(type_id, location_id) do
+  def type_location(type_id, location_id) do
     API.new()
     |> Req.get(
       url: "/products/types/:type_id/locations/:location_id",
@@ -153,9 +153,9 @@ defmodule ReqNOAA.API.Products do
 
   - `type_id` (String.t): .
   """
-  @spec products_type_locations(String.t()) ::
+  @spec type_locations(String.t()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.TextProductLocationCollection.t()} | {:error, any()}
-  def products_type_locations(type_id) do
+  def type_locations(type_id) do
     API.new()
     |> Req.get(
       url: "/products/types/:type_id/locations",

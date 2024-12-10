@@ -140,7 +140,7 @@ defmodule ReqNOAA.API.Alerts do
 
   - `region` (MarineRegionCode): Marine region ID
   """
-  @spec active_region(ReqNOAA.Model.MarineRegionCode.t()) ::
+  @spec active_region(API.marine_region_code()) ::
           {:ok, ReqNOAA.Model.AlertCollectionGeoJson.t()}
           | {:ok, ReqNOAA.Model.AlertCollectionJsonLd.t()}
           | {:ok, ReqNOAA.Model.ProblemDetail.t()}

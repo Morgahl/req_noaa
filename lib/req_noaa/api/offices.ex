@@ -13,7 +13,7 @@ defmodule ReqNOAA.API.Offices do
 
   - `office_id` (NwsOfficeId): NWS office ID
   """
-  @spec office(ReqNOAA.Model.NwsOfficeId.t()) ::
+  @spec office(API.nws_office_id()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.Office.t()} | {:error, any()}
   def office(office_id) do
     API.new()
@@ -35,9 +35,9 @@ defmodule ReqNOAA.API.Offices do
   - `office_id` (NwsOfficeId): NWS office ID
   - `headline_id` (String.t): Headline record ID
   """
-  @spec office_headline(ReqNOAA.Model.NwsOfficeId.t(), String.t()) ::
+  @spec headline(API.nws_office_id(), String.t()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.OfficeHeadline.t()} | {:error, any()}
-  def office_headline(office_id, headline_id) do
+  def headline(office_id, headline_id) do
     API.new()
     |> Req.get(
       url: "/offices/:office_id/headlines/:headline_id",
@@ -56,9 +56,9 @@ defmodule ReqNOAA.API.Offices do
 
   - `office_id` (NwsOfficeId): NWS office ID
   """
-  @spec office_headlines(ReqNOAA.Model.NwsOfficeId.t()) ::
+  @spec headlines(API.nws_office_id()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.OfficeHeadlineCollection.t()} | {:error, any()}
-  def office_headlines(office_id) do
+  def headlines(office_id) do
     API.new()
     |> Req.get(
       url: "/offices/:office_id/headlines",

@@ -46,12 +46,12 @@ defmodule ReqNOAA.API.Gridpoints do
     - `:"Feature-Flags"` ([String.t]): Enable future and experimental features (see documentation for more info): * forecast_temperature_qv: Represent temperature as QuantitativeValue * forecast_wind_speed_qv: Represent wind speed as QuantitativeValue
     - `:units` (GridpointForecastUnits): Use US customary or SI (metric) units in textual output
   """
-  @spec gridpoint_forecast(nws_forecast_office_id(), integer(), integer(), keyword()) ::
+  @spec forecast(nws_forecast_office_id(), integer(), integer(), keyword()) ::
           {:ok, ReqNOAA.Model.GridpointForecastGeoJson.t()}
           | {:ok, ReqNOAA.Model.GridpointForecastJsonLd.t()}
           | {:ok, ReqNOAA.Model.ProblemDetail.t()}
           | {:error, any()}
-  def gridpoint_forecast(wfo, x, y, opts \\ []) do
+  def forecast(wfo, x, y, opts \\ []) do
     API.new()
     |> Req.get(
       url: "/gridpoints/:wfo/:x,:y/forecast",
@@ -80,12 +80,12 @@ defmodule ReqNOAA.API.Gridpoints do
     - `:"Feature-Flags"` ([String.t]): Enable future and experimental features (see documentation for more info): * forecast_temperature_qv: Represent temperature as QuantitativeValue * forecast_wind_speed_qv: Represent wind speed as QuantitativeValue
     - `:units` (GridpointForecastUnits): Use US customary or SI (metric) units in textual output
   """
-  @spec gridpoint_forecast_hourly(nws_forecast_office_id(), integer(), integer(), keyword()) ::
+  @spec forecast_hourly(nws_forecast_office_id(), integer(), integer(), keyword()) ::
           {:ok, ReqNOAA.Model.GridpointForecastGeoJson.t()}
           | {:ok, ReqNOAA.Model.GridpointForecastJsonLd.t()}
           | {:ok, ReqNOAA.Model.ProblemDetail.t()}
           | {:error, any()}
-  def gridpoint_forecast_hourly(wfo, x, y, opts \\ []) do
+  def forecast_hourly(wfo, x, y, opts \\ []) do
     API.new()
     |> Req.get(
       url: "/gridpoints/:wfo/:x,:y/forecast/hourly",
@@ -114,12 +114,12 @@ defmodule ReqNOAA.API.Gridpoints do
     - `:limit` (integer()): Limit
     - `:cursor` (String.t): Pagination cursor
   """
-  @spec gridpoint_stations(nws_forecast_office_id(), integer(), integer(), keyword()) ::
+  @spec stations(nws_forecast_office_id(), integer(), integer(), keyword()) ::
           {:ok, ReqNOAA.Model.ObservationStationCollectionGeoJson.t()}
           | {:ok, ReqNOAA.Model.ObservationStationCollectionJsonLd.t()}
           | {:ok, ReqNOAA.Model.ProblemDetail.t()}
           | {:error, any()}
-  def gridpoint_stations(wfo, x, y, opts \\ []) do
+  def stations(wfo, x, y, opts \\ []) do
     API.new()
     |> Req.get(
       url: "/gridpoints/:wfo/:x,:y/stations",

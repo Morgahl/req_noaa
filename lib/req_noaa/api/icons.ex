@@ -54,9 +54,9 @@ defmodule ReqNOAA.API.Icons do
   - `:size` (IconsSizeParameter): Font size
   - `:fontsize` (integer()): Font size
   """
-  @spec icons_dual_condition(String.t(), String.t(), String.t(), String.t(), keyword()) ::
+  @spec dual_condition(String.t(), String.t(), String.t(), String.t(), keyword()) ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, String.t()} | {:error, any()}
-  def icons_dual_condition(set, time_of_day, first, second, opts \\ []) do
+  def dual_condition(set, time_of_day, first, second, opts \\ []) do
     API.new()
     |> Req.get(
       url: "/icons/:set/:time_of_day/:first/:second",
@@ -77,9 +77,9 @@ defmodule ReqNOAA.API.Icons do
   @doc """
   Returns a list of icon codes and textual descriptions. Icon services in API are deprecated.
   """
-  @spec icons_summary() ::
+  @spec summary() ::
           {:ok, ReqNOAA.Model.ProblemDetail.t()} | {:ok, ReqNOAA.Model.IconsSummaryResponse.t()} | {:error, any()}
-  def icons_summary do
+  def summary do
     API.new()
     |> Req.get(url: "/icons")
     |> handle_response([
