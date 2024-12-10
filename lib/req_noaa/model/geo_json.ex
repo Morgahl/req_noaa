@@ -13,7 +13,7 @@ defmodule ReqNOAA.Model.GeoJson do
       ]
 
       @type t :: %__MODULE__{
-              :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+              :"@context" => any() | nil,
               :id => String.t() | nil,
               :type => String.t(),
               :geometry => ReqNOAA.Model.GeoJsonGeometry.t() | nil,
@@ -42,7 +42,7 @@ defmodule ReqNOAA.Model.GeoJson do
       ]
 
       @type t :: %__MODULE__{
-              :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+              :"@context" => any() | nil,
               :id => String.t() | nil,
               :type => String.t(),
               :geometry => ReqNOAA.Model.GeoJsonGeometry.t() | nil,

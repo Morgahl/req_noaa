@@ -10,7 +10,7 @@ defmodule ReqNOAA.Model.ObservationStationCollectionJsonLd do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :"@graph" => [ReqNOAA.Model.ObservationStation.t()] | nil,
           :observationStations => [String.t()] | nil,
           :pagination => ReqNOAA.Model.PaginationInfo.t() | nil

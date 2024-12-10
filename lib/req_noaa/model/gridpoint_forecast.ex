@@ -17,13 +17,13 @@ defmodule ReqNOAA.Model.GridpointForecast do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :geometry => String.t() | nil,
-          :units => ReqNOAA.Model.GridpointForecastUnits.t() | nil,
+          :units => String.t() | nil,
           :forecastGenerator => String.t() | nil,
           :generatedAt => DateTime.t() | nil,
           :updateTime => DateTime.t() | nil,
-          :validTimes => ReqNOAA.Model.Iso8601Interval.t() | nil,
+          :validTimes => String.t() | nil,
           :elevation => ReqNOAA.Model.QuantitativeValue.t() | nil,
           :periods => [ReqNOAA.Model.GridpointForecastPeriod.t()] | nil
         }
@@ -32,10 +32,8 @@ defmodule ReqNOAA.Model.GridpointForecast do
 
   def decode(value) do
     value
-    |> Model.deserialize(:units, :struct, ReqNOAA.Model.GridpointForecastUnits)
     |> Model.deserialize(:generatedAt, :datetime, nil)
     |> Model.deserialize(:updateTime, :datetime, nil)
-    |> Model.deserialize(:validTimes, :struct, ReqNOAA.Model.Iso8601Interval)
     |> Model.deserialize(:elevation, :struct, ReqNOAA.Model.QuantitativeValue)
     |> Model.deserialize(:periods, :list, ReqNOAA.Model.GridpointForecastPeriod)
   end

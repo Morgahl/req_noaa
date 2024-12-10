@@ -8,7 +8,7 @@ defmodule ReqNOAA.Model.IconsSummaryResponse do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :icons => %{optional(String.t()) => ReqNOAA.Model.IconsSummaryResponseIconsValue.t()}
         }
 

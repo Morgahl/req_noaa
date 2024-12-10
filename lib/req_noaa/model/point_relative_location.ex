@@ -15,7 +15,7 @@ defmodule ReqNOAA.Model.PointRelativeLocation do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :id => String.t() | nil,
           :type => String.t(),
           :geometry => String.t() | nil,

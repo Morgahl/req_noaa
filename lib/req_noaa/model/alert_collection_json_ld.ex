@@ -14,7 +14,7 @@ defmodule ReqNOAA.Model.AlertCollectionJsonLd do
           :title => String.t() | nil,
           :updated => DateTime.t() | nil,
           :pagination => ReqNOAA.Model.PaginationInfo.t() | nil,
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :"@graph" => [ReqNOAA.Model.Alert.t()] | nil
         }
 

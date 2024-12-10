@@ -24,7 +24,7 @@ defmodule ReqNOAA.Model.Zone do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :geometry => String.t() | nil,
           :"@id" => String.t() | nil,
           :"@type" => String.t() | nil,
@@ -33,7 +33,7 @@ defmodule ReqNOAA.Model.Zone do
           :name => String.t() | nil,
           :effectiveDate => DateTime.t() | nil,
           :expirationDate => DateTime.t() | nil,
-          :state => ReqNOAA.Model.ZoneState.t() | nil,
+          :state => String.t() | nil,
           :forecastOffice => String.t() | nil,
           :gridIdentifier => String.t() | nil,
           :awipsLocationIdentifier => String.t() | nil,
@@ -50,6 +50,5 @@ defmodule ReqNOAA.Model.Zone do
     value
     |> Model.deserialize(:effectiveDate, :datetime, nil)
     |> Model.deserialize(:expirationDate, :datetime, nil)
-    |> Model.deserialize(:state, :struct, ReqNOAA.Model.ZoneState)
   end
 end

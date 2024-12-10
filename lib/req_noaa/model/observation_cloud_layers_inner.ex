@@ -9,7 +9,7 @@ defmodule ReqNOAA.Model.ObservationCloudLayersInner do
 
   @type t :: %__MODULE__{
           :base => ReqNOAA.Model.QuantitativeValue.t(),
-          :amount => ReqNOAA.Model.MetarSkyCoverage.t()
+          :amount => String.t()
         }
 
   alias ReqNOAA.Model
@@ -17,6 +17,5 @@ defmodule ReqNOAA.Model.ObservationCloudLayersInner do
   def decode(value) do
     value
     |> Model.deserialize(:base, :struct, ReqNOAA.Model.QuantitativeValue)
-    |> Model.deserialize(:amount, :struct, ReqNOAA.Model.MetarSkyCoverage)
   end
 end

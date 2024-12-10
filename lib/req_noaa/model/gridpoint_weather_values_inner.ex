@@ -8,7 +8,7 @@ defmodule ReqNOAA.Model.GridpointWeatherValuesInner do
   ]
 
   @type t :: %__MODULE__{
-          :validTime => ReqNOAA.Model.Iso8601Interval.t(),
+          :validTime => String.t(),
           :value => [ReqNOAA.Model.GridpointWeatherValuesInnerValueInner.t()]
         }
 
@@ -16,7 +16,6 @@ defmodule ReqNOAA.Model.GridpointWeatherValuesInner do
 
   def decode(value) do
     value
-    |> Model.deserialize(:validTime, :struct, ReqNOAA.Model.Iso8601Interval)
     |> Model.deserialize(:value, :list, ReqNOAA.Model.GridpointWeatherValuesInnerValueInner)
   end
 end

@@ -34,7 +34,7 @@ defmodule ReqNOAA.Model.Observation do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :geometry => String.t() | nil,
           :"@id" => String.t() | nil,
           :"@type" => String.t() | nil,

@@ -13,7 +13,7 @@ defmodule ReqNOAA.Model.ZoneForecast do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :geometry => String.t() | nil,
           :zone => String.t() | nil,
           :updated => DateTime.t() | nil,

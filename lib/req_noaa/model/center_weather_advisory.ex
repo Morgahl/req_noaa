@@ -16,7 +16,7 @@ defmodule ReqNOAA.Model.CenterWeatherAdvisory do
   @type t :: %__MODULE__{
           :id => String.t() | nil,
           :issueTime => DateTime.t() | nil,
-          :cwsu => ReqNOAA.Model.NwsCenterWeatherServiceUnitId.t() | nil,
+          :cwsu => String.t() | nil,
           :sequence => integer() | nil,
           :start => DateTime.t() | nil,
           :end => DateTime.t() | nil,
@@ -29,7 +29,6 @@ defmodule ReqNOAA.Model.CenterWeatherAdvisory do
   def decode(value) do
     value
     |> Model.deserialize(:issueTime, :datetime, nil)
-    |> Model.deserialize(:cwsu, :struct, ReqNOAA.Model.NwsCenterWeatherServiceUnitId)
     |> Model.deserialize(:start, :datetime, nil)
     |> Model.deserialize(:end, :datetime, nil)
   end

@@ -9,7 +9,7 @@ defmodule ReqNOAA.Model.ObservationCollectionGeoJson do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :type => String.t(),
           :features => [ReqNOAA.Model.ObservationCollectionGeoJsonAllOfFeatures.t()]
         }

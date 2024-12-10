@@ -8,7 +8,7 @@ defmodule ReqNOAA.Model.OfficeHeadlineCollection do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t(),
+          :"@context" => any(),
           :"@graph" => [ReqNOAA.Model.OfficeHeadline.t()]
         }
 

@@ -17,7 +17,7 @@ defmodule ReqNOAA.Model.OfficeHeadline do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :"@id" => String.t() | nil,
           :id => String.t() | nil,
           :office => String.t() | nil,

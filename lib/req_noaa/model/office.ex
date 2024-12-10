@@ -22,7 +22,7 @@ defmodule ReqNOAA.Model.Office do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :"@type" => String.t() | nil,
           :"@id" => String.t() | nil,
           :id => String.t() | nil,

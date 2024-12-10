@@ -8,7 +8,7 @@ defmodule ReqNOAA.Model.TextProductLocationCollection do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :locations => %{optional(String.t()) => String.t()} | nil
         }
 

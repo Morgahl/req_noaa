@@ -12,7 +12,7 @@ defmodule ReqNOAA.Model.AlertCollectionGeoJson do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :type => String.t(),
           :features => [ReqNOAA.Model.AlertCollectionGeoJsonAllOfFeatures.t()],
           :title => String.t() | nil,

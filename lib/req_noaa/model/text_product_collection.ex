@@ -8,7 +8,7 @@ defmodule ReqNOAA.Model.TextProductCollection do
   ]
 
   @type t :: %__MODULE__{
-          :"@context" => ReqNOAA.Model.JsonLdContext.t() | nil,
+          :"@context" => any() | nil,
           :"@graph" => [ReqNOAA.Model.TextProduct.t()] | nil
         }
 
