@@ -83,16 +83,15 @@ defmodule ReqNOAA.Model do
 
   defp to_struct(map_or_list, module)
   defp to_struct(nil, _), do: nil
-
-  defp to_struct(list, module) when is_list(list) and is_atom(module) do
-    Enum.map(list, &to_struct(&1, module))
-  end
+  defp to_struct(list, module) when is_list(list) and is_atom(module), do: list_to_struct(list, module)
 
   defp to_struct(map, module) when is_map(map) and is_atom(module) do
     map
-    |> Map.to_list()
-    |> Enum.map(fn {key, value} -> {String.to_atom(key), value} end)
-    |> then(&struct(module, &1))
+    |> Enum.reduce(struct(module), &update_struct(&1, &2))
     |> module.decode()
   end
+
+  defp update_struct({key, value}, acc), do: Map.put(acc, String.to_atom(key), value)
+  defp list_to_struct([], _), do: []
+  defp list_to_struct([map | tail], module), do: [to_struct(map, module) | list_to_struct(tail, module)]
 end

@@ -1,4 +1,6 @@
-# Example ReqNOAA
+<!-- livebook:{"app_settings":{"auto_shutdown_ms":5000,"output_type":"rich","slug":"nm-active-alerts"}} -->
+
+# NM Active Alerts
 
 ```elixir
 Application.put_env(:req_noaa, :name, "Livebook")
@@ -7,7 +9,8 @@ Application.put_env(:req_noaa, :contact, "https://github.com/Morgahl/req_noaa")
 Mix.install([
   {:kino, "~> 0.14.2"},
   {:kino_maplibre, "~> 0.1.13"},
-  {:req_noaa, path: Path.join(__DIR__, "..")}
+  # {:req_noaa, path: Path.join(__DIR__, "..")}
+  {:req_noaa, github: "Morgahl/req_noaa", branch: "main"}
 ])
 
 defmodule StructCleaner do
@@ -34,22 +37,51 @@ end
 
 ## Section
 
-```elixir
-  ReqNOAA.API.Alerts.active_area("NM")
-```
+<!-- livebook:{"reevaluate_automatically":true} -->
 
 ```elixir
 alias MapLibre, as: Ml
-with {:ok, zone} <- ReqNOAA.API.Zones.forecast("NMZ403") do
-  Ml.new(center: {-124.5, 43.5}, zoom: 6)
-  |> Ml.add_source(zone.id,
-    type: :geojson,
-    data: StructCleaner.deep_cleanup(zone)
-  )
-  |> Ml.add_layer(id: zone.id,
-    type: :line,
-    source: zone.id,
-    paint: [line_color: "#FF0000"]
-  )
+
+ml = Ml.new(
+  center: {-105.5, 34.0},
+  zoom: 5,
+  style: :terrain,
+  key: System.fetch_env!("LB_MAP_TILER_KEY")
+)
+
+ml =
+with {:ok, active_alerts} <- ReqNOAA.API.Alerts.active_area("NM"),
+  active_alerts = StructCleaner.deep_cleanup(active_alerts) do
+    for feature <- active_alerts.features do
+        feature.properties.geocode."UGC"
+    end
+    |> List.flatten()
+    |> Enum.uniq()
+    |> Task.async_stream(&ReqNOAA.API.Zones.forecast(&1))
+    |> Stream.map(fn {:ok, {:ok, zone}} -> StructCleaner.deep_cleanup(zone) end)
+    |> Enum.reduce(ml, fn zone, ml -> 
+        ml
+        |> Ml.add_source(zone.id,
+          type: :geojson,
+          data: zone
+        )
+        |> Ml.add_layer(id: zone.id,
+          type: :line,
+          source: zone.id,
+          paint: [line_color: "#FF0000"]
+        )
+      end)
 end
+|> Kino.MapLibre.new()
+
+Kino.MapLibre.add_terrain_control(ml)
+Kino.MapLibre.add_fullscreen_control(ml)
+Kino.MapLibre.add_export_map(ml)
+Kino.MapLibre.add_locate_control(ml)
+Kino.MapLibre.add_nav_controls(ml)
+Kino.MapLibre.add_scale_control(ml)
+
+ml
 ```
+
+<!-- livebook:{"offset":2060,"stamp":{"token":"XCP.-7tkReLxxlUxU866EIK2DedulWSGVyB97m0Kl0NmQhPVxvNvttgL2dRcZ6LVluJFwAcdqp0zbgHkl9Fjqvfr-xW_X1JmUz33WeVZgEMhsYXypwkonjXkZATREM0EY17RFwBFamkymSKEcQbf9FHBxRm0Liwge9nn7XQKZCK8yik","version":2}} -->
