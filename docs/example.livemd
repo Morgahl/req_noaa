@@ -18,9 +18,9 @@ defmodule StructCleaner do
   end
 
   def deep_cleanup(map) when is_map(map) do
-    map
-    |> Enum.map(fn {key, value} -> {key, deep_cleanup(value)} end)
-    |> Enum.into(%{})
+    Enum.reduce(Map.keys(map), map, fn key, acc ->
+      Map.update!(acc, key, &deep_cleanup/1)
+    end)
   end
 
   def deep_cleanup(list) when is_list(list) do
@@ -36,7 +36,7 @@ end
 
 ```elixir
 alias MapLibre, as: Ml
-with {:ok, zone} <- ReqNOAA.Api.zone_forecast("PZZ350") do
+with {:ok, zone} <- ReqNOAA.API.Zones.forecast("PZZ350") do
   Ml.new(center: {-124.5, 43.5}, zoom: 6)
   |> Ml.add_source(zone.id,
     type: :geojson,
